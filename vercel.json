@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "env": {
+    "OPENAI_API_KEY": "@openai_api_key",
+    "ASSEMBLYAI_API_KEY": "@assemblyai_api_key",
+    "TRANSCRIPTION_SERVICE": "openai",
+    "NODE_ENV": "production"
+  }
+}
