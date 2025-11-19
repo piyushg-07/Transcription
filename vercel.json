@@ -7,9 +7,8 @@
     }
   ],
   "env": {
-    "OPENAI_API_KEY": "@openai_api_key",
-    "ASSEMBLYAI_API_KEY": "@assemblyai_api_key",
-    "TRANSCRIPTION_SERVICE": "openai",
+    "ASSEMBLYAI_API_KEY": "666d8f7210544bf59e79555dcf23dfff",
+    "TRANSCRIPTION_SERVICE": "assemblyai",
     "NODE_ENV": "production"
   }
 }
