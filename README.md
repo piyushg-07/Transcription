@@ -6,6 +6,12 @@
 
 [![Demo Video](https://img.shields.io/badge/Watch%20Demo-Google%20Drive-blue?style=for-the-badge&logo=googledrive)](https://drive.google.com/file/d/1Znbe_XFDkcdK8y-6LkHjp61Pmmt20JSw/view?usp=sharing)
 
+<a href="https://drive.google.com/file/d/1Znbe_XFDkcdK8y-6LkHjp61Pmmt20JSw/view?usp=sharing">
+  <img src="https://drive.google.com/thumbnail?id=1Znbe_XFDkcdK8y-6LkHjp61Pmmt20JSw&sz=w1000" alt="Demo Video Thumbnail" width="600" />
+</a>
+
+*Click the image above to watch the full demo video*
+
 🎬 **Production-Ready Video Captioning Platform with AI Transcription**
 
 [![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)
