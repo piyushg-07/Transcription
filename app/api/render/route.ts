@@ -1,8 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { bundle } from '@remotion/bundler';
-import { renderMedia, selectComposition } from '@remotion/renderer';
-import path from 'path';
-import { ensureDir, generateUniqueFilename } from '@/lib/ffmpeg-utils';
 import { CaptionSegment, CaptionStyle } from '@/types';
 
 export const maxDuration = 300; // 5 minutes max execution time
@@ -23,6 +19,26 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Check if running in Vercel serverless environment
+    const isVercel = process.env.VERCEL === '1';
+    
+    if (isVercel) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Video rendering is not supported on Vercel due to serverless limitations. Please use the CLI rendering script locally: node scripts/render-video.js',
+          message: 'Download the video and captions, then render locally using the provided CLI script.',
+        },
+        { status: 501 }
+      );
+    }
+
+    // Only import Remotion in non-Vercel environments
+    const { bundle } = await import('@remotion/bundler');
+    const { renderMedia, selectComposition } = await import('@remotion/renderer');
+    const path = await import('path');
+    const { ensureDir, generateUniqueFilename } = await import('@/lib/ffmpeg-utils');
+
     // Paths
     const videoPath = path.join(process.cwd(), 'public', 'uploads', filename);
     const outputDir = path.join(process.cwd(), 'public', 'renders');
@@ -35,7 +51,7 @@ export async function POST(request: NextRequest) {
     console.log('Bundling Remotion...');
     const bundleLocation = await bundle({
       entryPoint: path.join(process.cwd(), 'remotion', 'index.ts'),
-      webpackOverride: (config) => config,
+      webpackOverride: (config: any) => config,
     });
 
     // Get composition
@@ -64,7 +80,7 @@ export async function POST(request: NextRequest) {
         style,
       },
       concurrency: 1,
-      onProgress: ({ progress }) => {
+      onProgress: ({ progress }: any) => {
         console.log(`Rendering progress: ${Math.round(progress * 100)}%`);
       },
     });
